@@ -12,7 +12,7 @@ const metascraper = require('metascraper')([
 export const metascrape = async (storyUrl) => {
   try {
     // ProxyUrl to get arounc CORS without a backend
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    const proxyUrl = "https://spooky-citadel-25273.herokuapp.com/";
     const url = proxyUrl + storyUrl
     
     // axios call to retrieve page data
