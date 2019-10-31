@@ -63,7 +63,7 @@ const StoryList = () => {
       const data = await response.json();
       // Set storyId state array
       setStoryIds(data);
-      for(let i = 0; i < 10; i++){
+      for(let i = 0; i < 30; i++){
         fetchStoryData(data[i]);
       }
     }

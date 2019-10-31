@@ -28,6 +28,6 @@ export const metascrape = async (storyUrl) => {
     }
   } catch(err) {
     // Catch 403s and 500s to links
-    console.log(err);
+    return;
   }
 }

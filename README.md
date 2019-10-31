@@ -3,6 +3,8 @@ Thursday, Oct 31, 2019
 Fintros Assessment
 
 Bootstrapped with Create React App
+
+Deployed at: https://secret-cliffs-78209.herokuapp.com/
 ## Starting the application
 - `npm i`
 - `npm start`
@@ -18,13 +20,13 @@ Extra work is needed to find solutions that bypass these issues
 ## ToDo
 1. Refactoring of StoryList, Header, and Footer.
 Footer is repetitive, and some code can be moved out into seperate files,
-especially storyList.
-
-2. Refactor css files
+especially storyList.  FeaturedStory should be changed as it relies on the first item of storyData and is currently unaffected by filters.  Did not develop with filters in mind in hindsight.
+2. Change storyList to a proper Masonry layout
+3. Refactor css files
 Style sheets aren't encapsulated, but I have seperated them out regardless.
-3. Accessibility
-4. Testing
-5. font is wonky/not accurate due to probably not having the right font assets
+4. Accessibility
+5. Testing
+6. font is wonky/not accurate due to probably not having the right font assets
 
 ## Design Philosphy
 Any time I want to rerender, I should be using state.  Because I am filtering data, I should either have:

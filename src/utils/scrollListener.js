@@ -2,32 +2,42 @@ import  { useState, useEffect} from 'react';
 
 const ScrollListener = (onScrollFunc) => {
   // state to determine if onScrollFunc should be triggered
-  const [loadMore, setLoadMore] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
 
   const handleScroll = () => {
     const storyLoaderDiv = document.querySelector(".story-list__loader");
-    const bounding = storyLoaderDiv.getBoundingClientRect();
-    if (bounding.bottom <= window.innerHeight) {
-      setLoadMore(true);
+    const bounding = storyLoaderDiv.getBoundingClientRect()
+
+    if (bounding.top <= window.innerHeight) {
+      setIsFetching(true);
+    }
+  }
+  
+  const debounce = (func, delay) => {
+    let inDebounce;
+    return function () {
+      clearTimeout(inDebounce);
+      inDebounce = setTimeout(() => {
+        func.apply(this, arguments);
+      }, delay);
     }
   }
 
   useEffect(() => {
     // Add a scroll Event listener at componentDidMount
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', debounce(handleScroll, 350));
+    return () => window.removeEventListener('scroll', debounce(handleScroll, 350));
   }, []);
 
   /**
-   * useEffect for setLoadMore state
-   * Everytime loadMore is changed, increase our storyData
+   * useEffect for setIsFetching state
+   * Everytime isFetching is changed, increase our storyData
    */
   useEffect(() => {
-    if (!loadMore) return;
-    console.log("hi");
-    // onScrollFunc();
-    setLoadMore(false);
-  }, [loadMore]);
+    if (!isFetching) return;
+    onScrollFunc();  
+    setIsFetching(false);
+  }, [isFetching]);
 };
 
 export default ScrollListener;
