@@ -8,18 +8,21 @@ const propTypes = {
   description: PropTypes.string,
 };
 
-const Story = ({ title, description, imageSrc}) => {
+const Story = ({ title, description, imageSrc, url}) => {
   return (
     <li className="story">
-      <img 
-        className="story__image"
-        src={imageSrc} 
-        alt="story"
-      />
-      <div className="story__excerpt">
-        <h2>{ title }</h2>
-        <p className="story__excerpt-description">{ description }</p>
-      </div>
+      <a href={url} className="story__wrapper">
+        <img 
+          className="story__image"
+          src={imageSrc} 
+          alt="story"
+        />
+        <div className="story__excerpt">
+          <span>MONEY DIARIES</span>
+          <h2 className="story__excerpt-title">{ title }</h2>
+          <p className="story__excerpt-description">{ description }</p>
+        </div>
+      </a>
     </li>
   );
 }

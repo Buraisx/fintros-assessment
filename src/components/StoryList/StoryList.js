@@ -81,6 +81,7 @@ const StoryList = () => {
 
   return (
     <section className="story-list__container">
+      {/* controls can be its own component in the future.  Can be reused for other pages */}
       <nav className="story-list__controls">
         <ul>
           {
@@ -97,17 +98,26 @@ const StoryList = () => {
           }
         </ul>
       </nav>
+  
       {
+        // Featured Story
         storyData[0] ?
         <main className="story-list__featured">
           <img 
             src={storyData[0].image}
             className="story-list__featured-image"
-            alt="hi"
+            alt="featured story"
           />
           <div className="story-list__featured-excerpt">
+            <span>NEWS</span>
             <h2>{storyData[0].title}</h2>
             <p>{storyData[0].description}</p>
+          </div>
+          {/* Mobile use excerpt */}
+          <div className="story__excerpt">
+            <span>NEWS</span>
+              <h2 className="story__excerpt-title">{storyData[0].title}</h2>
+              <p className="story__excerpt-description">{storyData[0].title}</p>
           </div>
         </main>
         : null
@@ -127,16 +137,9 @@ const StoryList = () => {
               title={story.title}
               description={story.description}
               imageSrc={story.image}
+              url={story.url}
             />
           ))
-          // storyData.slice(1).map( story => (
-          //   <Story
-          //     key={story.id}
-          //     title={story.title}
-          //     description={story.description}
-          //     imageSrc={story.image}
-          //   />
-          // ))
         }
         <li>
           

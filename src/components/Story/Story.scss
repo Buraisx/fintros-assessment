@@ -1,11 +1,13 @@
 .story{
-  // display: inline-block;
-  // flex: 1;
   background-color: #FFFFFF;
   margin-bottom: 20px;
   width: calc(50% - 10px);
   @media screen and (max-width: 619px) {
     width: 100%
+  }
+  &__wrapper{
+    color: inherit;
+    text-decoration: none;
   }
   &__image {
     width: 100%;
@@ -13,6 +15,11 @@
   }
   &__excerpt{
     padding: 35px 60px;
+    &-title{
+      &:hover{
+        text-decoration: underline;
+      }
+    }
     &-description{
       margin-top: 18px;
     }
