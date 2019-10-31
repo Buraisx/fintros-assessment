@@ -1,0 +1,101 @@
+.footer{
+  width: 100%;
+  background-color: #222222;
+  color: #ffffff;
+  padding: 50px 250px;
+  margin-top: 120px;
+  @media screen and (max-width: 1033px) {
+    padding: 50px 10px;
+  }
+  &__icon{
+    display: inline-block;
+    margin-right: 10px;
+    &>a{
+      background-repeat: no-repeat;
+      opacity: 0.6;
+      display:block;
+      &:hover {
+        opacity: 1;
+        transition: opacity 60ms linear;
+      }
+    }
+  }
+  &__copyright{
+    font-family: 'FuturaBT-heavy';
+    line-height: 23.01px;
+    font-size: 13px;
+    opacity: 0.3;
+  }
+  &__row{
+    display:flex;
+    justify-content: space-evenly;
+    margin: 50px auto;
+  }
+  &__ws-links{
+    display:flex;
+    justify-content: flex-start;
+    margin: 50px auto;
+    & > a {
+      margin-right: 20px;
+    }
+  }
+  &__list{
+    width: 25%;
+    li:not(:first-child) {
+      margin-bottom: 10px;
+    }
+    &-title{
+      margin-bottom: 25px;
+      b{
+        letter-spacing: 2px;
+        font-size: 0.875rem;
+      }
+    }
+    &-link {
+      color: #fff;
+      opacity: 1;
+      text-decoration: none;
+      transition: opacity 60ms linear;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+}
+.gb-flag, .us-flag, .ca-flag{
+  background-size: 41px 24px;
+  height: 24px;
+  width: 41px;
+}
+.gb-flag{
+  background-image: url('../../assets/icons/gb-flag.svg');
+}
+.us-flag{
+  background-image: url('../../assets/icons/us-flag.svg');
+}
+.ca-flag{
+  background-image: url('../../assets/icons/ca-flag.svg');
+}
+.apple-icon, .android-icon{
+  width: 28px;
+  height: 35px;
+}
+.apple-icon{
+  background-image: url('../../assets/icons/apple.svg');
+}
+.android-icon{
+  background-image: url('../../assets/icons/android.svg');
+}
+.fb-icon,.tt-icon,.ig-icon{
+  width: 30px;
+  height: 30px;
+}
+.fb-icon{
+  background-image: url('../../assets/icons/fb-icon.svg');
+}
+.tt-icon{
+  background-image: url('../../assets/icons/tt-icon.svg');
+}
+.ig-icon{
+  background-image: url('../../assets/icons/ig-icon.svg');
+}

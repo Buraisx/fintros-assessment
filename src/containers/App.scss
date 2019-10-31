@@ -1,0 +1,91 @@
+@font-face {
+  font-family: 'FuturaBT-book';
+  src: url('../assets/fonts/futura-book-bt.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'FuturaBT-heavy';
+  src: url('../assets/fonts/futura-heavy.ttf') format('truetype');
+}
+* {
+  box-sizing: border-box;
+}
+html, body {
+  font-family: 'FuturaBT-Book', sans-serif;
+}
+
+p, a{
+  font-size: 1.125rem;
+}
+
+p{
+  line-height: 30px;
+}
+h1, h2 {
+  font-family: 'FuturaBT-heavy', sans-serif;
+  color: #272C30;
+  font-weight: 100;
+}
+h1{
+  font-size: 90px;
+  letter-spacing: -4px;
+  line-height: 100px;
+}
+h2{
+  color: #000000;
+  font-size: 27px;
+  letter-spacing:-0.81px;
+  line-height:40px;
+}
+img{
+  max-width: 100%;
+  height: auto;
+}
+
+.site-container{
+  background-color: #F9F8F6;
+  min-height: 100vh;
+}
+
+.nav-hamburger{
+  display:none;
+  position: relative;
+  background-color: #fab131;
+  align-items: center;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  @media screen and (max-width: 619px) {
+    display:flex;
+  }
+  &:hover{
+    background-color: #f7a81d;
+  }
+  &__container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+  }
+  &__line{
+    width: 38%;
+    height: 2px;
+    background-color: #fff;
+    margin: 0 auto 4px;
+    margin-bottom: 3px;
+  }
+}
+
+.button{
+  color: #FFFFFF;
+  background: #ffb21a;
+  margin-left: 20px;
+  border-radius: 52px;
+  text-decoration: none;
+  padding: 16px 20px 15px;
+  transition: background 80ms linear,opacity 1s linear;
+  &:hover{
+    background: #faa600;
+  }
+}

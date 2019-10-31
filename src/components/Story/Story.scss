@@ -1,0 +1,20 @@
+.story{
+  // display: inline-block;
+  // flex: 1;
+  background-color: #FFFFFF;
+  margin-bottom: 20px;
+  width: calc(50% - 10px);
+  @media screen and (max-width: 619px) {
+    width: 100%
+  }
+  &__image {
+    width: 100%;
+    max-height: 500px;
+  }
+  &__excerpt{
+    padding: 35px 60px;
+    &-description{
+      margin-top: 18px;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+.header{
+  &__nav{
+    z-index: 9999;
+    padding: 30px 122px;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    background-color: #FFFFFF;
+    @media screen and (max-width: 619px) {
+      padding: 16px 25px;
+    }
+    &-logo{
+      @media screen and (max-width: 619px) {
+        display:none;
+      }
+      &--mobile{
+        height: 40px;
+        max-width: 100%;
+        display:none;
+        @media screen and (max-width: 619px) {
+          display: block;
+        }
+      }
+    }
+    &-link {
+      color: #121212;
+      text-decoration: none;
+      font-weight: 300;
+    }
+    
+    &-block{
+      display: flex;
+      align-items: center;
+      @media screen and (max-width: 619px) {
+        display:none;
+      }
+      li{
+        display: inline;
+      }
+    }
+  }
+}
+
+.hero-section{
+  text-align:center;
+  padding-top: 230px;
+  &__subtitle{
+    font-family: 'FuturaBT-heavy', sans-serif;
+    color: #959594;
+    margin-top: 15px;
+    font-size: 0.875rem;
+    letter-spacing: 2px;
+    line-height: 21px;
+  }
+}
