@@ -1,5 +1,5 @@
 .story-list {
-  margin-top: 100px;
+  margin-top: 70px;
   margin-bottom: 50px;
   display: flex;
   flex-flow: row wrap;
@@ -7,31 +7,6 @@
   justify-content: space-between;
   @media screen and (max-width: 619px) {
     flex-flow: column wrap;
-  }
-  &__featured {
-    margin-top: 60px;
-    position: relative;
-    display:block;
-    &-image{
-      width: 100%;
-    }
-    .story__excerpt{
-      background-color: #FFFFFF;
-      @media screen and (min-width: 619px) {
-        display:none;
-      }
-    }
-    &-excerpt{
-      position: absolute;
-      bottom: 10%;
-      padding: 35px 60px;
-      right: 0;
-      width: 580px;
-      background: hsla(0,0%,100%,.85);
-      @media screen and (max-width: 619px) {
-        display:none;
-      }
-    }
   }
   &__container{
     overflow: visible;
@@ -48,7 +23,7 @@
   &__controls{
     display: flex;
     justify-content: center;
-    @media screen and (max-width: 620px) {
+    @media screen and (max-width: 619px) {
       display:none;
     }
     ul{

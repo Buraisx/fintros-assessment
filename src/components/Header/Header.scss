@@ -8,6 +8,9 @@
     position: fixed;
     top: 0;
     background-color: #FFFFFF;
+    @media screen and (max-width: 853px) {
+      padding: 30px 50px;
+    }
     @media screen and (max-width: 619px) {
       padding: 16px 25px;
     }

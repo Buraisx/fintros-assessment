@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { metascrape } from '../../utils/metascraper';
 import ScrollListener from '../../utils/scrollListener';
 
+import { BallBeat } from 'react-pure-loaders';
+
 import './StoryList.scss';
 import Story from '../Story/Story';
 
@@ -14,6 +16,8 @@ const StoryList = () => {
   const [storyData, setStoryData] = useState([]);
   // Filter options
   const [filterOption, setFilterOption] = useState("even");
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const filterOptions = [
     {
@@ -28,6 +32,7 @@ const StoryList = () => {
 
   // displayStories
   const fetchStoryData = async (storyId) => {
+    setIsLoading(true);
     const response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`);
     const data = await response.json();
 
@@ -39,6 +44,7 @@ const StoryList = () => {
       const newStoryData = { ...data, ...metaData }
       setStoryData(oldStoryData => [...oldStoryData, newStoryData]);
     }
+    setIsLoading(false);
   }
 
   /**
@@ -55,21 +61,6 @@ const StoryList = () => {
   // customHook that triggers argument function on scroll
   ScrollListener(increaseStoryData);
 
-  // Initial componentDidMount fetch call for all storyIds
-  useEffect(() => {
-    // get all storyIds from top stories
-    const fetchStoryIds = async () => {
-      const response = await fetch(`https://hacker-news.firebaseio.com/v0/topstories.json`);
-      const data = await response.json();
-      // Set storyId state array
-      setStoryIds(data);
-      for(let i = 0; i < 30; i++){
-        fetchStoryData(data[i]);
-      }
-    }
-    fetchStoryIds();    
-  }, []);
-
   const changeFilterType = (e, filterType) => {
     e.preventDefault();
     if(filterOption !== filterType) {
@@ -78,6 +69,31 @@ const StoryList = () => {
       setFilterOption(filterType);
     }
   }
+
+  const filterData = (condition, index) => {
+    switch (condition) {
+      case "even":
+        return index%2; 
+      case "odd":
+        return !(index%2);
+      default:
+        return index % 2;
+    }
+  }
+  // Initial componentDidMount fetch call for all storyIds
+  useEffect(() => {
+    // get all storyIds from top stories
+    const fetchStoryIds = async () => {
+      const response = await fetch(`https://hacker-news.firebaseio.com/v0/topstories.json`);
+      const data = await response.json();
+      // Set storyId state array
+      setStoryIds(data);
+      for (let i = 0; i < 30; i++) {
+        fetchStoryData(data[i]);
+      }
+    }
+    fetchStoryIds();
+  }, []);
 
   return (
     <section className="story-list__container">
@@ -98,42 +114,15 @@ const StoryList = () => {
           }
         </ul>
       </nav>
-  
-      {
-        // Featured Story
-        storyData[0] ?
-        <main className="story-list__featured">
-          <img 
-            src={storyData[0].image}
-            className="story-list__featured-image"
-            alt="featured story"
-          />
-          <div className="story-list__featured-excerpt">
-            <span>NEWS</span>
-            <h2>{storyData[0].title}</h2>
-            <p>{storyData[0].description}</p>
-          </div>
-          {/* Mobile use excerpt */}
-          <div className="story__excerpt">
-            <span>NEWS</span>
-              <h2 className="story__excerpt-title">{storyData[0].title}</h2>
-              <p className="story__excerpt-description">{storyData[0].title}</p>
-          </div>
-        </main>
-        : null
-      }
       
       <ul className="story-list">
         {
-          storyData.slice(1).filter((story,index) => {
-            if(filterOption === "even") {
-              return index%2;
-            } else {
-              return !(index%2);
-            }
-          }).map( story => (
+          storyData.filter((story, index) => {
+            return filterData(filterOption, index);
+          }).map( (story, index) => (
             <Story
               key={story.id}
+              isLargeFormat={index === 0}
               title={story.title}
               description={story.description}
               imageSrc={story.image}
@@ -141,14 +130,17 @@ const StoryList = () => {
             />
           ))
         }
-        <li>
-          
-        </li>
       </ul>
       <div className="story-list__loader">
-        <a className="button" href="/" onClick={increaseStoryData}>
-            More posts
-          </a>
+        {
+          isLoading ? <BallBeat
+            color={'#000000'}
+            loading={true}
+          />
+          : <a className="button" href="/">
+              Scroll for more posts	&darr;
+            </a>
+        }
       </div>
     </section>
   );

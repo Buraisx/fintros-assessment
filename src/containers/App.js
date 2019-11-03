@@ -4,6 +4,7 @@ import './App.scss';
 import Header from '../components/Header/Header';
 import StoryList from '../components/StoryList/StoryList';
 import Footer from '../components/Footer/Footer';
+
 const App = () => {
   return (
     <div className="site-container">
