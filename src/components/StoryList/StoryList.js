@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { metascrape } from '../../utils/metascraper';
 import ScrollListener from '../../utils/scrollListener';
 
+import { BallBeat } from 'react-pure-loaders';
+
 import './StoryList.scss';
 import Story from '../Story/Story';
 
@@ -14,6 +16,8 @@ const StoryList = () => {
   const [storyData, setStoryData] = useState([]);
   // Filter options
   const [filterOption, setFilterOption] = useState("even");
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const filterOptions = [
     {
@@ -28,6 +32,7 @@ const StoryList = () => {
 
   // displayStories
   const fetchStoryData = async (storyId) => {
+    setIsLoading(true);
     const response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`);
     const data = await response.json();
 
@@ -39,6 +44,7 @@ const StoryList = () => {
       const newStoryData = { ...data, ...metaData }
       setStoryData(oldStoryData => [...oldStoryData, newStoryData]);
     }
+    setIsLoading(false);
   }
 
   /**
@@ -54,21 +60,6 @@ const StoryList = () => {
 
   // customHook that triggers argument function on scroll
   ScrollListener(increaseStoryData);
-
-  // Initial componentDidMount fetch call for all storyIds
-  useEffect(() => {
-    // get all storyIds from top stories
-    const fetchStoryIds = async () => {
-      const response = await fetch(`https://hacker-news.firebaseio.com/v0/topstories.json`);
-      const data = await response.json();
-      // Set storyId state array
-      setStoryIds(data);
-      for(let i = 0; i < 30; i++){
-        fetchStoryData(data[i]);
-      }
-    }
-    fetchStoryIds();    
-  }, []);
 
   const changeFilterType = (e, filterType) => {
     e.preventDefault();
@@ -89,7 +80,21 @@ const StoryList = () => {
         return index % 2;
     }
   }
-  
+  // Initial componentDidMount fetch call for all storyIds
+  useEffect(() => {
+    // get all storyIds from top stories
+    const fetchStoryIds = async () => {
+      const response = await fetch(`https://hacker-news.firebaseio.com/v0/topstories.json`);
+      const data = await response.json();
+      // Set storyId state array
+      setStoryIds(data);
+      for (let i = 0; i < 30; i++) {
+        fetchStoryData(data[i]);
+      }
+    }
+    fetchStoryIds();
+  }, []);
+
   return (
     <section className="story-list__container">
       {/* controls can be its own component in the future.  Can be reused for other pages */}
@@ -126,11 +131,16 @@ const StoryList = () => {
           ))
         }
       </ul>
-
       <div className="story-list__loader">
-        <a className="button" href="/" onClick={increaseStoryData}>
-            More posts
-          </a>
+        {
+          isLoading ? <BallBeat
+            color={'#000000'}
+            loading={true}
+          />
+          : <a className="button" href="/">
+              Scroll for more posts	&darr;
+            </a>
+        }
       </div>
     </section>
   );
