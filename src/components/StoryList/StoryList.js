@@ -79,6 +79,17 @@ const StoryList = () => {
     }
   }
 
+  const filterData = (condition, index) => {
+    switch (condition) {
+      case "even":
+        return index%2; 
+      case "odd":
+        return !(index%2);
+      default:
+        return index % 2;
+    }
+  }
+  
   return (
     <section className="story-list__container">
       {/* controls can be its own component in the future.  Can be reused for other pages */}
@@ -98,42 +109,15 @@ const StoryList = () => {
           }
         </ul>
       </nav>
-  
-      {
-        // Featured Story
-        storyData[0] ?
-        <main className="story-list__featured">
-          <img 
-            src={storyData[0].image}
-            className="story-list__featured-image"
-            alt="featured story"
-          />
-          <div className="story-list__featured-excerpt">
-            <span>NEWS</span>
-            <h2>{storyData[0].title}</h2>
-            <p>{storyData[0].description}</p>
-          </div>
-          {/* Mobile use excerpt */}
-          <div className="story__excerpt">
-            <span>NEWS</span>
-              <h2 className="story__excerpt-title">{storyData[0].title}</h2>
-              <p className="story__excerpt-description">{storyData[0].title}</p>
-          </div>
-        </main>
-        : null
-      }
       
       <ul className="story-list">
         {
-          storyData.slice(1).filter((story,index) => {
-            if(filterOption === "even") {
-              return index%2;
-            } else {
-              return !(index%2);
-            }
-          }).map( story => (
+          storyData.filter((story, index) => {
+            return filterData(filterOption, index);
+          }).map( (story, index) => (
             <Story
               key={story.id}
+              isLargeFormat={index === 0}
               title={story.title}
               description={story.description}
               imageSrc={story.image}
@@ -141,10 +125,8 @@ const StoryList = () => {
             />
           ))
         }
-        <li>
-          
-        </li>
       </ul>
+
       <div className="story-list__loader">
         <a className="button" href="/" onClick={increaseStoryData}>
             More posts
