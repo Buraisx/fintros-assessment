@@ -10,7 +10,7 @@ const propTypes = {
 };
 
 const Story = ({ isLargeFormat, title, description, imageSrc, url }) => {
-  console.log(isLargeFormat);
+
   return (
     <li className={ isLargeFormat ? "story--featured" : "story" }>
       <a href={url} className="story__wrapper">
